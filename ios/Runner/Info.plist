@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDecription</key>
+	<String>Permission for gallery</String>
+	<key>NSMicrophoneUsageDecription</key>
+	<String>Permission for microphone</String>
+	<key>NSCameraUsageDecription</key>
+	<String>Permission for camera usage</String>
 </dict>
 </plist>

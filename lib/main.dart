@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.blueGrey,
-              ),
+            seedColor: Colors.blueGrey,
+            surface: const Color.fromARGB(204, 140, 215, 253),
+          ),
         ),
         home: PlacesListScreen(),
         routes: {

@@ -24,6 +24,7 @@ class _ImageInputState extends State<ImageInput> {
         _storedImage = File(imageFile.path);
       });
     }
+    
   }
 
   @override
@@ -39,11 +40,14 @@ class _ImageInputState extends State<ImageInput> {
               borderRadius: BorderRadius.circular(15)),
           alignment: Alignment.center,
           child: _storedImage != null
-              ? Image.file(
-                  _storedImage!,
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                )
+              ? ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.file(
+                    _storedImage!,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+              )
               : const Text(
                   'No Image Taken',
                   textAlign: TextAlign.center,

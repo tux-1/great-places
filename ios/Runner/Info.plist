@@ -51,5 +51,7 @@
 	<String>Permission for microphone</String>
 	<key>NSCameraUsageDecription</key>
 	<String>Permission for camera usage</String>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<String>Permission for location</String>
 </dict>
 </plist>

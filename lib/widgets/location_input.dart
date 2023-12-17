@@ -15,6 +15,7 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   LatLng? _locationData;
   bool _isLoading = false;
+  final _mapController = MapController();
 
   final Map<String, dynamic> address = {};
 
@@ -23,8 +24,6 @@ class _LocationInputState extends State<LocationInput> {
       _isLoading = true;
     });
     final locationData = await Location().getLocation();
-    print(locationData.latitude);
-    print(locationData.longitude);
     setState(() {
       _locationData = LatLng(
         double.parse(locationData.latitude.toString()),
@@ -79,6 +78,7 @@ class _LocationInputState extends State<LocationInput> {
                     ? const SizedBox(
                         child: Center(child: CircularProgressIndicator()))
                     : FlutterMap(
+                        mapController: _mapController,
                         options: MapOptions(
                             initialCenter: _locationData ??
                                 const LatLng(29.979012, 31.132819),
@@ -107,7 +107,59 @@ class _LocationInputState extends State<LocationInput> {
                     onPressed: _getCurrentLocation,
                     icon: const Icon(Icons.location_searching),
                   ),
-                )
+                ),
+                Positioned(
+                    bottom: 5,
+                    right: 5,
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .primaryColorLight
+                                  .withOpacity(0.8),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              )),
+                          child: IconButton(
+                            color: Colors.indigo,
+                            onPressed: () {
+                              if (_mapController.camera.zoom <= 22) {
+                                _mapController.move(
+                                  _mapController.camera.center,
+                                  _mapController.camera.zoom + 0.5,
+                                );
+                              }
+                            },
+                            icon: const Icon(Icons.zoom_in_map_outlined),
+                          ),
+                        ),
+                        const Divider(height: 1),
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .primaryColorLight
+                                  .withOpacity(0.8),
+                              borderRadius: const BorderRadius.only(
+                                bottomLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              )),
+                          child: IconButton(
+                            color: Colors.indigo,
+                            onPressed: () {
+                              if (_mapController.camera.zoom >= 4) {
+                                _mapController.move(
+                                  _mapController.camera.center,
+                                  _mapController.camera.zoom - 0.5,
+                                );
+                              }
+                            },
+                            icon: const Icon(Icons.zoom_out_map_outlined),
+                          ),
+                        ),
+                      ],
+                    ))
               ]),
             ),
           ),

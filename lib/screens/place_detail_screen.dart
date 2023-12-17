@@ -25,7 +25,7 @@ class PlaceDetailScreen extends StatelessWidget {
               onPressed: () async {
                 await Provider.of<GreatPlaces>(context, listen: false)
                     .deletePlace(id.toString());
-                navigator.pushReplacementNamed('/');
+                navigator.pop();
               },
               icon: const Icon(Icons.delete, color: Colors.red))
         ],

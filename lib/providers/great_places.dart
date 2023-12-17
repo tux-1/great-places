@@ -75,6 +75,5 @@ class GreatPlaces with ChangeNotifier {
               ),
             ))
         .toList();
-    notifyListeners();
   }
 }

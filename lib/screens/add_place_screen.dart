@@ -35,9 +35,6 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   }
 
   void _savePlace() {
-    print(_titleController.text);
-    print(_pickedImage);
-    print(_locationData);
     if (_titleController.text.isEmpty ||
         _pickedImage == null ||
         _locationData == null) {

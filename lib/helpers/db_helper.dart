@@ -6,10 +6,10 @@ class DBHelper {
   static Future<Database> database() async {
     //to store in an extension of our Db path
     final dbPath = await sql.getDatabasesPath();
-    
+
     // FOR CLEARING THE DATABASE
     // sql.deleteDatabase(path.join(dbPath, 'places.db'));
-    
+
     return sql.openDatabase(path.join(dbPath, 'places.db'),
         onCreate: (db, version) {
       //onCreate will run first time to create the table
@@ -27,9 +27,17 @@ class DBHelper {
     );
   }
 
+  static Future<void> delete(String id) async {
+    final db = await DBHelper.database();
+    db.delete(
+      'user_places',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+  }
+
   static Future<List<Map<String, dynamic>>> getData(String table) async {
     final db = await DBHelper.database();
-    
     return db.query(table);
   }
 }

@@ -13,6 +13,15 @@ class GreatPlaces with ChangeNotifier {
     return _items;
   }
 
+  Place findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+  }
+
+  Future<void> deletePlace(String id) async {
+    DBHelper.delete(id);
+    notifyListeners();
+  }
+
   Future<void> addPlace(
     String title,
     File image,

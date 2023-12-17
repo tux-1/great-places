@@ -23,9 +23,9 @@ class MyApp extends StatelessWidget {
             surface: const Color.fromARGB(204, 140, 215, 253),
           ),
         ),
-        home: PlacesListScreen(),
+        home: const PlacesListScreen(),
         routes: {
-          AddPlaceScreen.routeName: (ctx) => AddPlaceScreen(),
+          AddPlaceScreen.routeName: (ctx) => const AddPlaceScreen(),
         },
       ),
     );

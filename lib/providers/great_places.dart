@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:geocoding/geocoding.dart';
 
 import '../models/place.dart';
 import '../helpers/db_helper.dart';
@@ -12,12 +13,32 @@ class GreatPlaces with ChangeNotifier {
     return _items;
   }
 
-  void addPlace(String title, File image) {
+  Future<void> addPlace(
+    String title,
+    File image,
+    PlaceLocation placeLocation,
+  ) async {
+    final place = await placemarkFromCoordinates(
+        placeLocation.latitude, placeLocation.longitude);
+    Placemark placeMark = place[0];
+    final name = placeMark.name;
+    final subLocality = placeMark.subLocality;
+    final locality = placeMark.locality;
+    final administrativeArea = placeMark.administrativeArea;
+    final postalCode = placeMark.postalCode;
+    final country = placeMark.country;
+    final address =
+        "$name, $subLocality, $locality, $administrativeArea $postalCode, $country";
+    final updatedPlaceLocaion = PlaceLocation(
+      latitude: placeLocation.latitude,
+      longitude: placeLocation.longitude,
+      address: address,
+    );
     final newPlace = Place(
       id: DateTime.now().toString(),
       image: image,
       title: title,
-      location: PlaceLocation(latitude: 1, longitude: 1),
+      location: updatedPlaceLocaion,
     );
     _items.add(newPlace);
     notifyListeners();
@@ -25,6 +46,9 @@ class GreatPlaces with ChangeNotifier {
       'id': newPlace.id,
       'title': newPlace.title,
       'image': newPlace.image.path,
+      'loc_lat': newPlace.location.latitude,
+      'loc_lng': newPlace.location.longitude,
+      'address': newPlace.location.address,
     });
   }
 
@@ -32,10 +56,15 @@ class GreatPlaces with ChangeNotifier {
     final dataList = await DBHelper.getData('user_places');
     _items = dataList
         .map((item) => Place(
-            id: item['id'],
-            title: item['title'],
-            image: File(item['image']),
-            location: PlaceLocation(latitude: 1, longitude: 1)))
+              id: item['id'],
+              title: item['title'],
+              image: File(item['image']),
+              location: PlaceLocation(
+                latitude: item['loc_lat'],
+                longitude: item['loc_lng'],
+                address: item['address'],
+              ),
+            ))
         .toList();
     notifyListeners();
   }

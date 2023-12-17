@@ -5,7 +5,8 @@ import 'package:latlong2/latlong.dart';
 // import 'package:open_street_map_search_and_pick/open_street_map_search_and_pick.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  final Function onSelectPlace;
+  LocationInput(this.onSelectPlace);
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -22,8 +23,8 @@ class _LocationInputState extends State<LocationInput> {
       _isLoading = true;
     });
     final locationData = await Location().getLocation();
-    // print(locationData.latitude);
-    // print(locationData.longitude);
+    print(locationData.latitude);
+    print(locationData.longitude);
     setState(() {
       _locationData = LatLng(
         double.parse(locationData.latitude.toString()),
@@ -35,6 +36,7 @@ class _LocationInputState extends State<LocationInput> {
 
   Marker myMarker() {
     if (_locationData != null) {
+      widget.onSelectPlace(_locationData);
       return Marker(
         rotate: true,
         point: _locationData!,
@@ -78,8 +80,8 @@ class _LocationInputState extends State<LocationInput> {
                         child: Center(child: CircularProgressIndicator()))
                     : FlutterMap(
                         options: MapOptions(
-                            initialCenter:
-                                _locationData ?? const LatLng(50.5, 30.51),
+                            initialCenter: _locationData ??
+                                const LatLng(29.979012, 31.132819),
                             initialZoom: 8,
                             onTap: (tapPosition, latLng) {
                               setState(() {

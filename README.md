@@ -1,6 +1,6 @@
 # Great Places App
 
-Great Places is a mobile application developed using Dart and the Flutter framework. It serves as a platform for users to [brief description of the app's main functionality or purpose].
+Great Places is a mobile application developed using Dart and the Flutter framework. It serves as an application for users to save their visited places in local memory.
 
 ## Features
 

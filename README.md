@@ -1,16 +1,36 @@
-# great_places
+# Great Places App
 
-A new Flutter project.
+Great Places is a mobile application developed using Dart and the Flutter framework. It serves as a platform for users to [brief description of the app's main functionality or purpose].
+
+## Features
+
+- **Location-Based Memory:** Capture and store your favorite places with detailed information.
+- **Add Your Place:** Contribute to the community by sharing your favorite places.
+
+## Technologies Used
+
+- Dart
+- Flutter
+- Flutter Map
+- Geocoding
+- Providers State Management
+- SQFLite
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+To run this application locally, follow these steps:
 
-A few resources to get you started if this is your first Flutter project:
+1. Clone the repository: `git clone https://github.com/tux-1/great-places.git`
+2. Navigate to the project directory: `cd great-places`
+3. Install dependencies: `flutter pub get`
+4. Run the app: `flutter run`
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Contributing
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+If you would like to contribute to the development of this project, DM me on discord **@tuxedo.**
+
+## License
+
+This project is licensed under the [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT).
+
+
